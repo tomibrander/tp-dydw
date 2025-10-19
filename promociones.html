@@ -31,21 +31,21 @@
           <h3>Llevá 2 productos y obtené 50% en el segundo</h3>
           <div class="productos-promo">
             <div class="producto-item">
-              <img src="./img/notebook.jpg" alt="iPhone 15" class="producto-img">
+              <img src="./img/iphone.jpg" alt="iPhone 15" class="producto-img">
               <h4>iPhone 15</h4>
               <p class="precio">$800.000</p>
               <input type="number" min="0" value="0" class="cantidad-input" data-producto="iphone15" data-precio="800000">
               <button class="btn-comprar" onclick="agregarAlCarrito('iphone15', 'iPhone 15', 800000)">Comprar</button>
             </div>
             <div class="producto-item">
-              <img src="./img/notebook.jpg" alt="MacBook Air M2" class="producto-img">
+              <img src="./img/macbook.jpg" alt="MacBook Air M2" class="producto-img">
               <h4>MacBook Air M2</h4>
               <p class="precio">$1.200.000</p>
               <input type="number" min="0" value="0" class="cantidad-input" data-producto="macbook" data-precio="1200000">
               <button class="btn-comprar" onclick="agregarAlCarrito('macbook', 'MacBook Air M2', 1200000)">Comprar</button>
             </div>
             <div class="producto-item">
-              <img src="./img/notebook.jpg" alt="iPad Pro" class="producto-img">
+              <img src="./img/ipad.jpg" alt="iPad Pro" class="producto-img">
               <h4>iPad Pro</h4>
               <p class="precio">$600.000</p>
               <input type="number" min="0" value="0" class="cantidad-input" data-producto="ipad" data-precio="600000">
@@ -58,21 +58,21 @@
           <h3>3x2 en productos seleccionados</h3>
           <div class="productos-promo">
             <div class="producto-item">
-              <img src="./img/auriculares.jpg" alt="AirPods Pro" class="producto-img">
+              <img src="./img/airpods.jpg" alt="AirPods Pro" class="producto-img">
               <h4>AirPods Pro</h4>
               <p class="precio">$200.000</p>
               <input type="number" min="0" value="0" class="cantidad-input" data-producto="airpods" data-precio="200000">
               <button class="btn-comprar" onclick="agregarAlCarrito('airpods', 'AirPods Pro', 200000)">Comprar</button>
             </div>
             <div class="producto-item">
-              <img src="./img/smartwatch.jpg" alt="Apple Watch" class="producto-img">
+              <img src="./img/applewatch.jpg" alt="Apple Watch" class="producto-img">
               <h4>Apple Watch</h4>
               <p class="precio">$400.000</p>
               <input type="number" min="0" value="0" class="cantidad-input" data-producto="watch" data-precio="400000">
               <button class="btn-comprar" onclick="agregarAlCarrito('watch', 'Apple Watch', 400000)">Comprar</button>
             </div>
             <div class="producto-item">
-              <img src="./img/auriculares.jpg" alt="Magic Mouse" class="producto-img">
+              <img src="./img/mouse.jpg" alt="Magic Mouse" class="producto-img">
               <h4>Magic Mouse</h4>
               <p class="precio">$80.000</p>
               <input type="number" min="0" value="0" class="cantidad-input" data-producto="mouse" data-precio="80000">
@@ -85,21 +85,21 @@
           <h3>10% de descuento por compras superiores a $30.000</h3>
           <div class="productos-promo">
             <div class="producto-item">
-              <img src="./img/notebook.jpg" alt="Gaming PC" class="producto-img">
+              <img src="./img/pc.jpg" alt="Gaming PC" class="producto-img">
               <h4>Gaming PC</h4>
               <p class="precio">$2.500.000</p>
               <input type="number" min="0" value="0" class="cantidad-input" data-producto="gamingpc" data-precio="2500000">
               <button class="btn-comprar" onclick="agregarAlCarrito('gamingpc', 'Gaming PC', 2500000)">Comprar</button>
             </div>
             <div class="producto-item">
-              <img src="./img/notebook.jpg" alt="Monitor 4K" class="producto-img">
+              <img src="./img/monitor.jpg" alt="Monitor 4K" class="producto-img">
               <h4>Monitor 4K</h4>
               <p class="precio">$500.000</p>
               <input type="number" min="0" value="0" class="cantidad-input" data-producto="monitor" data-precio="500000">
               <button class="btn-comprar" onclick="agregarAlCarrito('monitor', 'Monitor 4K', 500000)">Comprar</button>
             </div>
             <div class="producto-item">
-              <img src="./img/auriculares.jpg" alt="Teclado Mecánico" class="producto-img">
+              <img src="./img/teclado.jpg" alt="Teclado Mecánico" class="producto-img">
               <h4>Teclado Mecánico</h4>
               <p class="precio">$150.000</p>
               <input type="number" min="0" value="0" class="cantidad-input" data-producto="teclado" data-precio="150000">
@@ -127,132 +127,6 @@
     <p>© 2025 TecnoFlex - Todos los derechos reservados</p>
   </footer>
 
-  <script>
-    let carrito = [];
-
-    function agregarAlCarrito(id, nombre, precio) {
-      const cantidadInput = document.querySelector(`[data-producto="${id}"]`);
-      const cantidad = parseInt(cantidadInput.value);
-      
-      if (cantidad <= 0) {
-        alert('Por favor ingresa una cantidad válida');
-        return;
-      }
-
-      const productoExistente = carrito.find(item => item.id === id);
-      
-      if (productoExistente) {
-        productoExistente.cantidad += cantidad;
-      } else {
-        carrito.push({
-          id: id,
-          nombre: nombre,
-          precio: precio,
-          cantidad: cantidad
-        });
-      }
-
-      // Limpiar el input
-      cantidadInput.value = 0;
-      
-      // Actualizar resumen
-      actualizarResumen();
-    }
-
-    // Función para calcular descuentos según promociones
-    function calcularDescuentos() {
-      let totalSinDescuento = 0;
-      let descuentoTotal = 0;
-
-      // Calcular total sin descuento
-      carrito.forEach(item => {
-        totalSinDescuento += item.precio * item.cantidad;
-      });
-
-      // Aplicar promoción 1: 2x1 (50% en el segundo)
-      const productosPromo1 = carrito.filter(item => 
-        ['iphone15', 'macbook', 'ipad'].includes(item.id)
-      );
-      
-      productosPromo1.forEach(item => {
-        if (item.cantidad >= 2) {
-          const pares = Math.floor(item.cantidad / 2);
-          const descuento = (item.precio * 0.5) * pares;
-          descuentoTotal += descuento;
-        }
-      });
-
-      const productosPromo2 = carrito.filter(item => 
-        ['airpods', 'watch', 'mouse'].includes(item.id)
-      );
-      
-      productosPromo2.forEach(item => {
-        if (item.cantidad >= 3) {
-          const grupos = Math.floor(item.cantidad / 3);
-          const descuento = item.precio * grupos; // El tercero es gratis
-          descuentoTotal += descuento;
-        }
-      });
-
-      if (totalSinDescuento > 30000) {
-        const productosPromo3 = carrito.filter(item => 
-          ['gamingpc', 'monitor', 'teclado'].includes(item.id)
-        );
-        
-        productosPromo3.forEach(item => {
-          const subtotal = item.precio * item.cantidad;
-          const descuento = subtotal * 0.1;
-          descuentoTotal += descuento;
-        });
-      }
-
-      return {
-        totalSinDescuento: totalSinDescuento,
-        descuentoTotal: descuentoTotal,
-        totalFinal: totalSinDescuento - descuentoTotal
-      };
-    }
-
-    function actualizarResumen() {
-      const listaProductos = document.getElementById('lista-productos');
-      const totalSinDescuento = document.getElementById('total-sin-descuento');
-      const descuentoAplicado = document.getElementById('descuento-aplicado');
-      const totalFinal = document.getElementById('total-final');
-
-      if (carrito.length === 0) {
-        listaProductos.innerHTML = '<p>No hay productos en el carrito</p>';
-        totalSinDescuento.textContent = '0';
-        descuentoAplicado.textContent = '0';
-        totalFinal.textContent = '0';
-        return;
-      }
-
-      let html = '<ul>';
-      carrito.forEach(item => {
-        const subtotal = item.precio * item.cantidad;
-        html += `<li>${item.nombre} x${item.cantidad} - $${subtotal.toLocaleString()}</li>`;
-      });
-      html += '</ul>';
-
-      listaProductos.innerHTML = html;
-
-      // Calcular y mostrar totales
-      const calculos = calcularDescuentos();
-      totalSinDescuento.textContent = calculos.totalSinDescuento.toLocaleString();
-      descuentoAplicado.textContent = calculos.descuentoTotal.toLocaleString();
-      totalFinal.textContent = calculos.totalFinal.toLocaleString();
-    }
-
-    // Función para limpiar el carrito
-    function limpiarCarrito() {
-      carrito = [];
-      actualizarResumen();
-    }
-
-    // Inicializar la página
-    document.addEventListener('DOMContentLoaded', function() {
-      actualizarResumen();
-    });
-  </script>
+  <script src="promociones.js"></script>
 </body>
 </html>
