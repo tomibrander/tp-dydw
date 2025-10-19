@@ -60,7 +60,7 @@ function calcularDescuentos() {
     }
   });
 
-  if (totalSinDescuento > 30000) {
+  if (totalSinDescuento > 300000) {
     const productosPromo3 = carrito.filter(item => 
       ['gamingpc', 'monitor', 'teclado'].includes(item.id)
     );
